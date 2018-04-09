@@ -1,1 +1,111 @@
-/*  @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+@import '../node_modules/@angular/material/theming';
+
+@include mat-core();
+
+// https://material.io/guidelines/style/color.html#color-color-palette
+$SynergyBlue: (
+  50: #ffebee,
+  100: #ffa18f,
+  200: #0099d1,
+  300: #00aeef,
+  400: #12b3fc,
+  500: #00aeef,
+  600: #0099d1,
+  700: #007fAD,
+  800: #00698f,
+  900: #b71c1c,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$SynergyTeal: (
+  50: #ffebee,
+  100: #ffcdd2,
+  200: #5adfe3,
+  300: #32d0d5,
+  400: #2cc4c9,
+  500: #27b4b9,
+  600: #20a0a4,
+  700: #1d8d91,
+  800: #0f7b80,
+  900: #b71c1c,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$SynergyRed: (
+  50: #ffebee,
+  100: #ffa18f,
+  200: #ffa18f,
+  300: #ff7f66,
+  400: #f57058,
+  500: #ea6149,
+  600: #db4c32,
+  700: #cf3d23,
+  800: #bd3820,
+  900: #b71c1c,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$custom-theme-primary: mat-palette($SynergyBlue);
+$custom-theme-accent: mat-palette($SynergyTeal);
+$custom-theme-warn: mat-palette($SynergyRed);
+
+$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+
+@include angular-material-theme($custom-theme);
