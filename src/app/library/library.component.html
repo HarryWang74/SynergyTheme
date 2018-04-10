@@ -1,10 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>Angular Material Synergy Theme</h1>
+      <h1>Synergy Angular5 UI Library</h1>
     </div>
   </div>
 
+  <!-- input -->
   <div class="row">
     <div class="col-md-4">
         <h3>Standard Input</h3>
@@ -56,6 +57,7 @@
     </div>
   </div>
 
+  <!-- select -->
   <div class="row">
     <div class="col-md-4">
         <h3>Standard select</h3>
@@ -106,6 +108,7 @@
     </div>
   </div>
 
+  <!-- textarea -->
   <div class="row">
     <div class="col-md-4">
       <h3>Text area</h3>
@@ -116,6 +119,7 @@
     <div class="col-md-4"></div>
   </div>
 
+  <!-- Date picker -->
   <div class="row">
     <div class="col-md-4">
         <h3>Date picker</h3>
@@ -135,6 +139,7 @@
     </div>
   </div>
 
+  <!-- Stepper -->
   <div class="row">
     <div class="col-md-12">
         <h3>Stepper</h3>
@@ -176,6 +181,7 @@
     </div>
   </div>
 
+  <!-- Tabs -->
   <div class="row">
     <div class="col-md-12">
         <h3>Tabs</h3>
@@ -186,13 +192,13 @@
     </div>
   </div>
 
+  <!-- Buttons -->
   <div class="row">
     <div class="col-md-12">
         <h3>Buttons</h3>
         <div class="button-row">
             <button mat-raised-button>Basic</button>
             <button mat-raised-button color="primary">Primary</button>
-            <button mat-raised-button color="accent">Accent</button>
             <button mat-raised-button color="warn">Warn</button>
             <button mat-raised-button disabled>Disabled</button>
             <a mat-raised-button routerLink=".">Link</a>
@@ -200,6 +206,7 @@
     </div>
   </div>
 
+  <!-- Icon Buttons -->
   <div class="row">
       <div class="col-md-12">
           <h3>Icon Buttons</h3>
@@ -208,9 +215,6 @@
                   <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
                 </button>
                 <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-                </button>
-                <button mat-icon-button color="accent">
                   <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
                 </button>
                 <button mat-icon-button color="warn">
@@ -223,13 +227,13 @@
       </div>
   </div>
 
+  <!-- Circle Buttons -->
   <div class="row">
       <div class="col-md-12">
           <h3>Circle Buttons</h3>
           <div class="button-row">
               <button mat-fab>Basic</button>
               <button mat-fab color="primary">Primary</button>
-              <button mat-fab color="accent">Accent</button>
               <button mat-fab color="warn">Warn</button>
               <button mat-fab disabled>Disabled</button>
               <button mat-fab>
@@ -240,6 +244,7 @@
       </div>
   </div>
 
+  <!-- Radio Button & Check Box -->
   <div class="row">
     <div class="col-md-6">
         <h3>Radio button</h3>
@@ -254,6 +259,7 @@
     </div>
   </div>
 
+  <!-- Toggle button & Slider -->
   <div class="row">
       <div class="col-md-6">
           <h3>Toggle button</h3>
@@ -265,6 +271,7 @@
       </div>
   </div>
 
+  <!-- Spinner & Tooltips -->
   <div class="row">
       <div class="col-md-6">
           <h3>Spinner</h3>
@@ -276,6 +283,7 @@
       </div>
   </div>
 
+  <!-- Progress-bar -->
   <div class="row">
       <div class="col-md-6">
           <h3>Progress-bar</h3>
@@ -287,9 +295,45 @@
       </div>
   </div>
 
+  <!-- Tags -->
+  <div class="row">
+    <div class="col-md-12">
+        <h3>Paginator</h3>
+        <mat-form-field>
+            List length:
+            <input matInput [(ngModel)]="length">
+          </mat-form-field>
+          
+          <mat-form-field>
+            Page size:
+            <input matInput [(ngModel)]="pageSize">
+          </mat-form-field>
+          <mat-form-field>
+            Page size options:
+            <input matInput
+                   [ngModel]="pageSizeOptions"
+                   (ngModelChange)="setPageSizeOptions($event)">
+          </mat-form-field>
+          
+          <mat-paginator [length]="length"
+                        [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        (page)="pageEvent = $event">
+          </mat-paginator>
+          
+          <div *ngIf="pageEvent">
+            <h5>Page Change Event Properties</h5>
+            <div>List length: {{pageEvent.length}}</div>
+            <div>Page size: {{pageEvent.pageSize}}</div>
+            <div>Page index: {{pageEvent.pageIndex}}</div>
+          </div>
+    </div>
+  </div>
+
+  <!-- Tags -->
   <div class="row">
       <div class="col-md-6">
-          <h3>Basic chips</h3>
+          <h3>Tags</h3>
           <mat-chip-list>
               <mat-chip>One fish</mat-chip>
               <mat-chip>Two fish</mat-chip>
@@ -298,7 +342,7 @@
             </mat-chip-list>
       </div>
       <div class="col-md-6">
-          <h3>Chips with input</h3>
+          <h3>Tags with input</h3>
           <mat-form-field class="demo-chip-list">
               <mat-chip-list #chipList>
                 <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"

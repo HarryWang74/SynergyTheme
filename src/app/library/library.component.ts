@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import {FormsModule, ReactiveFormsModule, FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {PageEvent} from '@angular/material';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -36,6 +37,18 @@ export class LibraryComponent implements OnInit {
   ]);
 
   matcher = new MyErrorStateMatcher();
+
+    // MatPaginator Inputs
+    length = 100;
+    pageSize = 10;
+    pageSizeOptions = [5, 10, 25, 100];
+  
+    // MatPaginator Output
+    pageEvent: PageEvent;
+  
+    setPageSizeOptions(setPageSizeOptionsInput: string) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
 
   pokemonGroups = [
     {
