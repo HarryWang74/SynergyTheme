@@ -1,32 +1,318 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>Synergy Angular UI Library</h1>
-    </div>
-
-    <div class="col-md-12">
-        <h2>Form controll</h2>
+      <h1>Angular Material Synergy Theme</h1>
     </div>
   </div>
 
   <div class="row">
-      <div class="col-md-3">
-          <mat-checkbox>Check me!</mat-checkbox>
-        </div>
-        <div class="col-md-3">
-          <mat-form-field>
+    <div class="col-md-4">
+        <h3>Standard Input</h3>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Favorite food" value="Sushi">
+        </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <h3>Password Input</h3>
+        <mat-form-field>
+            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <h3>Input with prefix</h3>
+        <mat-form-field>
+            <input matInput placeholder="Amount" type="number" class="example-right-align">
+            <span matPrefix>$&nbsp;</span>
+            <span matSuffix>.00</span>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-4">
+        <h3>Input with hints</h3>
+        <mat-form-field class="example-full-width">
+            <input matInput #message maxlength="256" placeholder="Message">
+            <mat-hint align="start"><strong>Max 256 characters</strong> </mat-hint>
+            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-4">
+        <h3>Input with error message</h3>
+        <mat-form-field>
+            <input matInput placeholder="Enter your email" [formControl]="email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-4">
+        <h3>Input with clear button</h3>
+        <mat-form-field class="example-form-field">
+            <input matInput type="text" placeholder="Clearable input" [(ngModel)]="value"/>
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+        <h3>Standard select</h3>
+        <mat-form-field>
+            <mat-select placeholder="Favorite food" [(ngModel)]="selectedValue" name="food">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <h3>Group select</h3>
+        <mat-form-field>
+            <mat-select placeholder="Pokemon" [formControl]="pokemonControl">
+              <mat-option>-- None --</mat-option>
+              <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
+                            [disabled]="group.disabled">
+                <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
+                  {{ pokemon.viewValue }}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <h3>Multi select</h3>
+        <mat-form-field>
+          <mat-select placeholder="Toppings" [formControl]="toppings" multiple>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <h3>Select with error message</h3>
+        <mat-form-field>
+          <mat-select placeholder="Choose one" [formControl]="selected" [errorStateMatcher]="matcher">
+            <mat-option>Clear</mat-option>
+            <mat-option value="valid">Valid option</mat-option>
+            <mat-option value="invalid">Invalid option</mat-option>
+          </mat-select>
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error>
+          <mat-error *ngIf="selected.hasError('pattern') && !selected.hasError('required')">
+            Your selection is invalid
+          </mat-error>
+        </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Text area</h3>
+      <mat-form-field>
+          <textarea matInput placeholder="Leave a comment"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+        <h3>Date picker</h3>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <h3>Date picker with large calendar</h3>
+        <mat-form-field class="example-full-width">
             <input matInput [matDatepicker]="picker" placeholder="Choose a date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
+            <mat-datepicker touchUi="true" #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+        <h3>Stepper</h3>
+        <button mat-raised-button (click)="isLinear = true" id="toggle-linear">Enable linear mode</button>
+
+        <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Fill out your name</ng-template>
+              <mat-form-field>
+                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Fill out your address</ng-template>
+              <mat-form-field>
+                <input matInput placeholder="Address" formControlName="secondCtrl" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+        <h3>Tabs</h3>
+        <mat-tab-group>
+            <mat-tab label="Tab 1"><h4>Content 1</h4></mat-tab>
+            <mat-tab label="Tab 2"><h4>Content 2</h4></mat-tab>
+          </mat-tab-group>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+        <h3>Buttons</h3>
+        <div class="button-row">
+            <button mat-raised-button>Basic</button>
+            <button mat-raised-button color="primary">Primary</button>
+            <button mat-raised-button color="accent">Accent</button>
+            <button mat-raised-button color="warn">Warn</button>
+            <button mat-raised-button disabled>Disabled</button>
+            <a mat-raised-button routerLink=".">Link</a>
         </div>
-        <div class="col-md-3">
-            <mat-slider min="1" max="5" step="0.5" value="1.5"></mat-slider>
-        </div>
-        <div class="col-md-3">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Favorite food" value="Sushi">
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+          <h3>Icon Buttons</h3>
+          <div class="button-row">
+              <button mat-icon-button>
+                  <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                </button>
+                <button mat-icon-button color="primary">
+                  <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                </button>
+                <button mat-icon-button color="accent">
+                  <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                </button>
+                <button mat-icon-button color="warn">
+                  <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                </button>
+                <button mat-icon-button disabled>
+                  <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                </button>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+          <h3>Circle Buttons</h3>
+          <div class="button-row">
+              <button mat-fab>Basic</button>
+              <button mat-fab color="primary">Primary</button>
+              <button mat-fab color="accent">Accent</button>
+              <button mat-fab color="warn">Warn</button>
+              <button mat-fab disabled>Disabled</button>
+              <button mat-fab>
+                <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+              </button>
+              <a mat-fab routerLink=".">Link</a>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+        <h3>Radio button</h3>
+        <mat-radio-group>
+            <mat-radio-button value="1">Option 1</mat-radio-button>
+            <mat-radio-button value="2">Option 2</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="col-md-6">
+        <h3>Check box</h3>
+        <mat-checkbox>Check me!</mat-checkbox>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-6">
+          <h3>Toggle button</h3>
+          <mat-slide-toggle>Slide me!</mat-slide-toggle>
+      </div>
+      <div class="col-md-6">
+          <h3>Slider</h3>
+          <mat-slider></mat-slider>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-6">
+          <h3>Spinner</h3>
+          <mat-spinner></mat-spinner>
+      </div>
+      <div class="col-md-6">
+          <h3>Tooltip</h3>
+          <span matTooltip="Tooltip!">I have a tooltip</span>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-6">
+          <h3>Progress-bar</h3>
+          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+      </div>
+      <div class="col-md-6">
+          <h3>Progress-bar</h3>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-6">
+          <h3>Basic chips</h3>
+          <mat-chip-list>
+              <mat-chip>One fish</mat-chip>
+              <mat-chip>Two fish</mat-chip>
+              <mat-chip color="primary" selected="true">Primary fish</mat-chip>
+              <mat-chip color="accent" selected="true">Accent fish</mat-chip>
+            </mat-chip-list>
+      </div>
+      <div class="col-md-6">
+          <h3>Chips with input</h3>
+          <mat-form-field class="demo-chip-list">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                         [removable]="removable" (remove)="remove(fruit)">
+                  {{fruit.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="New fruit..."
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)" />
+              </mat-chip-list>
             </mat-form-field>
-        </div>
+      </div>
   </div>
 </div>

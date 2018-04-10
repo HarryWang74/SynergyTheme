@@ -49,6 +49,8 @@ import { LibraryComponent } from './library/library.component';
     LibraryComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
