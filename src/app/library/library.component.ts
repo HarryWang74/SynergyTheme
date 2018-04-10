@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
-import {FormsModule, ReactiveFormsModule, FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, FormControl, Validators, FormBuilder, FormGroup, NgForm, FormGroupDirective} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {PageEvent} from '@angular/material';
+import {PageEvent, MatChipInputEvent} from '@angular/material';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
